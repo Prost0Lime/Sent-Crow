@@ -1,0 +1,64 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Inventory : MonoBehaviour
+{
+    public bool[] isFull;
+    public GameObject[] slots;
+    public GameObject inventory;
+    private bool inventoryOn;
+    float timerDisplay;
+    
+    public float displayTime = 4.0f;
+
+    public Letter script;
+    
+
+    private void Start()
+    {
+      
+        inventoryOn = false;
+        inventory.SetActive(false);
+        timerDisplay = -1.0f;
+    }   
+
+    void Update()
+    {
+        
+            if (timerDisplay >= 0)
+            {
+                timerDisplay -= Time.deltaTime;
+                if (timerDisplay < 0)
+                {
+                    inventory.SetActive(false);
+                    inventoryOn = false;
+                }
+            }
+        Debug.Log(script.LON);
+    }
+
+    public void Chest()
+    {
+        if (inventoryOn == false)
+        {
+            //if (script.LON == false)
+            //{
+            //    Debug.Log("falsee");
+            //}
+            //else if (script.LON == true)
+            //{
+            //    Debug.Log("truee");    
+            //}
+
+            inventoryOn = true;
+            inventory.SetActive(true);
+            timerDisplay = displayTime;                 
+        }
+        else if (inventoryOn == true)
+        {
+            inventoryOn = false;
+            inventory.SetActive(false);
+        }
+    }
+}

@@ -1,0 +1,318 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+using UnityEngine.SceneManagement;
+
+public class SaveMethod : MonoBehaviour
+{
+    public Inventory inventory;                     // получения инвентаря Karl для IsFull
+    public bool[] IsFullToSave;                     //заполненность слотов в инвентаре seril
+
+    public ChestItemManager CIM;
+    public int[] ChestItemIdToSave;             //инвентарь
+
+    public SceneManagerToSave SMTS;             
+
+    public MainMenu mainmenuFade;           //скрипт для загрузки из меню
+    public int LastSceneToSave;             //номер ласт сцены
+
+    public VectorValue playerStorage;       //сохранение координат игрока
+    public float[] PlayerXYToSave;
+
+    public int[] idObjectToSave;        //Ид предмета для сохранения
+    public int[] idObjectLocationToSave;        //Ид локации где был предмет
+    
+    public float[] ObjectPosXToSave;    //его коорды 
+    public float[] ObjectPosYToSave;    
+    public float[] ObjectPosZToSave;    
+    public bool[] ObjectSetActiveToSave;    //его активность в сцене
+
+    public bool[] itemStoryActiveToSave;        //активность сториАйтемов
+
+    public bool[] NPCActiveToSave;      //активность NPC
+
+    public void Start()
+    {
+        if (mainmenuFade == null)           //для устранения ошибок при запуске в меню
+        {
+            inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+            CIM = GameObject.FindGameObjectWithTag("Chest").GetComponent<ChestItemManager>();
+            SMTS = GameObject.FindGameObjectWithTag("SMTS").GetComponent<SceneManagerToSave>();
+        }
+    }
+
+    public void SaveGame()                                              //Сохранение данных
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/SentCrow.stcw");
+        SaveData data = new SaveData();
+
+        //--------------------данные о последней сцене на которой был игрок---------------
+        LastSceneToSave = SMTS.LastScene;
+        data.savedLastScene = LastSceneToSave;
+
+        if (SceneManager.GetActiveScene().buildIndex != 0)  //-------------запрещение сохранение на сцене Меню
+        {
+            //--------------------данные для сохранения заполненности инвентаря IsFull---------------        
+            IsFullToSave = inventory.isFull;
+            data.savedIsFull = IsFullToSave;
+
+            //--------------------предметы для сохранения инвентаря ---------------           
+            ChestItemIdToSave = CIM.ChestItemId;
+            data.savedChestItemId = ChestItemIdToSave;
+
+            //---------------------для сохранения координатов игрока------------------
+            SMTS.SavePlayerPos();
+            PlayerXYToSave = SMTS.PlayerXY;
+            playerStorage.initialValue.x = PlayerXYToSave[0];        //возможно лишнее  
+            playerStorage.initialValue.y = PlayerXYToSave[1];       //^
+            data.savedPlayerXY = PlayerXYToSave;
+
+            //--------------------для сохранения предметов на разных сценах---------
+            SMTS.SaveObjects();
+
+            SaveScene();
+
+            bf.Serialize(file, data);
+            file.Close();
+            Debug.Log("Игра сохранена");
+        }
+    }
+    public void SaveScene()    
+    {
+        if (SMTS.LastScene == 1)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath + "/SentCrowScene1.stcw");
+            SaveData data = new SaveData();
+
+            idObjectToSave = SMTS.idObject;
+            idObjectLocationToSave = SMTS.idLocationForSpawn;
+            ObjectPosXToSave = SMTS.ObjectPosX;
+            ObjectPosYToSave = SMTS.ObjectPosY;
+            ObjectPosZToSave = SMTS.ObjectPosZ;
+            ObjectSetActiveToSave = SMTS.ObjectSetActive;
+
+            data.savedIdObject = idObjectToSave;
+            data.savedIdObjectLocation = idObjectLocationToSave;
+            data.savedObjectPosX = ObjectPosXToSave;
+            data.savedObjectPosY = ObjectPosYToSave;
+            data.savedObjectPosZ = ObjectPosZToSave;
+            data.savedObjectSetActive = ObjectSetActiveToSave;
+
+            itemStoryActiveToSave = SMTS.itemStoriesActive;         //сохранение активности сториАйтемов
+            data.savedItemStoryActive = itemStoryActiveToSave;
+
+            NPCActiveToSave = SMTS.NPCActive;                   //сохранение активности NPC
+            data.savedNPCActive = NPCActiveToSave;
+
+            bf.Serialize(file, data);
+            file.Close();
+            Debug.Log("Сцена 1 сохранена");
+        }
+
+        if (SMTS.LastScene == 2)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath + "/SentCrowScene2.stcw");
+            SaveData data = new SaveData();
+
+            idObjectToSave = SMTS.idObject;
+            idObjectLocationToSave = SMTS.idLocationForSpawn;
+            ObjectPosXToSave = SMTS.ObjectPosX;
+            ObjectPosYToSave = SMTS.ObjectPosY;
+            ObjectPosZToSave = SMTS.ObjectPosZ;
+            ObjectSetActiveToSave = SMTS.ObjectSetActive;
+
+            data.savedIdObject = idObjectToSave;
+            data.savedIdObjectLocation = idObjectLocationToSave;
+            data.savedObjectPosX = ObjectPosXToSave;
+            data.savedObjectPosY = ObjectPosYToSave;
+            data.savedObjectPosZ = ObjectPosZToSave;
+            data.savedObjectSetActive = ObjectSetActiveToSave;
+
+            itemStoryActiveToSave = SMTS.itemStoriesActive;         //сохранение активности сториАйтемов
+            data.savedItemStoryActive = itemStoryActiveToSave;
+
+            NPCActiveToSave = SMTS.NPCActive;                   //сохранение активности NPC
+            data.savedNPCActive = NPCActiveToSave;
+
+            bf.Serialize(file, data);
+            file.Close();
+            Debug.Log("Сцена 2 сохранена");
+        }
+    }
+
+    public void LoadGame()                                              //загрузка
+    {
+        if (File.Exists(Application.persistentDataPath + "/SentCrow.stcw"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/SentCrow.stcw", FileMode.Open);
+            SaveData data = (SaveData)bf.Deserialize(file);
+            file.Close();
+
+            //--------------------переход на последнюю сцену где был игрок---------------
+            LastSceneToSave = data.savedLastScene;
+
+            if (SceneManager.GetActiveScene().buildIndex != LastSceneToSave)        //сравнение текущей сцены со сценой сохранения
+            {
+                if (mainmenuFade != null)       //проверка переходится переход из меню
+                {
+                    mainmenuFade.SceneMenu = LastSceneToSave;
+                    LoadPos();
+                    mainmenuFade.LoadGame();
+                }
+
+                else if (mainmenuFade == null)       //особо не думал но вроде лишнее
+                {
+                    LoadPos();
+                }
+            }
+
+            void LoadPos()  //локальный метод для загрузки координат для смены сцены
+            {
+                //-------------------данные для перемещения игрока на сохранённые координаты----------------
+                PlayerXYToSave = data.savedPlayerXY;
+                playerStorage.initialValue.x = PlayerXYToSave[0];
+                playerStorage.initialValue.y = PlayerXYToSave[1];
+            }
+
+            //--------------------данные для загрузки заполненности инвентаря IsFull---------------
+            IsFullToSave = data.savedIsFull;
+            inventory.isFull = IsFullToSave;
+
+            //--------------------предметы для сохранения инвентаря ---------------
+            ChestItemIdToSave = data.savedChestItemId;
+            CIM.ChestItemId = ChestItemIdToSave;
+            CIM.ReloadItem();
+
+            //-------------------данные для загрузки предметов на сцене----------
+
+            LoadScene();
+
+            SMTS.LoadSavedObjects();
+
+            Debug.Log("Игра загружена");
+        }
+        else
+            Debug.LogError("Нечего загружать!");
+      
+    }
+
+    public void LoadScene()         //метод загрузки объектов сцены
+    {
+        if (SMTS.LastScene == 1)
+        {
+            if (File.Exists(Application.persistentDataPath + "/SentCrowScene1.stcw"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(Application.persistentDataPath + "/SentCrowScene1.stcw", FileMode.Open);
+                SaveData data = (SaveData)bf.Deserialize(file);
+                file.Close();
+
+                idObjectToSave = data.savedIdObject;
+                idObjectLocationToSave = data.savedIdObjectLocation;
+                ObjectPosXToSave = data.savedObjectPosX;
+                ObjectPosYToSave = data.savedObjectPosY;
+                ObjectPosZToSave = data.savedObjectPosZ;
+                ObjectSetActiveToSave = data.savedObjectSetActive;
+
+                SMTS.idObject = idObjectToSave;
+                SMTS.idLocationForSpawn = idObjectLocationToSave;
+                SMTS.ObjectPosX = ObjectPosXToSave;
+                SMTS.ObjectPosY = ObjectPosYToSave;
+                SMTS.ObjectPosZ = ObjectPosZToSave;
+                SMTS.ObjectSetActive = ObjectSetActiveToSave;
+
+                itemStoryActiveToSave = data.savedItemStoryActive;         //загрузка активности сториАйтемов
+                SMTS.itemStoriesActive = itemStoryActiveToSave;
+
+                NPCActiveToSave = data.savedNPCActive;       //загрузка активности NPC
+                SMTS.NPCActive = NPCActiveToSave;
+
+                SMTS.LoadSavedObjects();
+                Debug.Log("Сцена 1 загружена");
+            }
+        }
+        if (SMTS.LastScene == 2)
+        {
+            if (File.Exists(Application.persistentDataPath + "/SentCrowScene2.stcw"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(Application.persistentDataPath + "/SentCrowScene2.stcw", FileMode.Open);
+                SaveData data = (SaveData)bf.Deserialize(file);
+                file.Close();
+
+                idObjectToSave = data.savedIdObject;
+                idObjectLocationToSave = data.savedIdObjectLocation;
+                ObjectPosXToSave = data.savedObjectPosX;
+                ObjectPosYToSave = data.savedObjectPosY;
+                ObjectPosZToSave = data.savedObjectPosZ;
+                ObjectSetActiveToSave = data.savedObjectSetActive;
+
+                SMTS.idObject = idObjectToSave;
+                SMTS.idLocationForSpawn = idObjectLocationToSave;
+                SMTS.ObjectPosX = ObjectPosXToSave;
+                SMTS.ObjectPosY = ObjectPosYToSave;
+                SMTS.ObjectPosZ = ObjectPosZToSave;
+                SMTS.ObjectSetActive = ObjectSetActiveToSave;
+
+                itemStoryActiveToSave = data.savedItemStoryActive;         //загрузка активности сториАйтемов
+                SMTS.itemStoriesActive = itemStoryActiveToSave;
+
+                NPCActiveToSave = data.savedNPCActive;       //загрузка активности NPC
+                SMTS.NPCActive = NPCActiveToSave;
+
+                SMTS.LoadSavedObjects();
+                Debug.Log("Сцена 2 загружена");
+            }
+        }
+    }
+
+    public void ResetData()                                             //сброс
+    {
+        if (File.Exists(Application.persistentDataPath + "/SentCrow.stcw"))
+        {
+            File.Delete(Application.persistentDataPath + "/SentCrow.stcw");
+            Debug.Log("Успешный сброс");
+        }
+        if (File.Exists(Application.persistentDataPath + "/SentCrowScene1.stcw"))
+        {
+            File.Delete(Application.persistentDataPath + "/SentCrowScene1.stcw");
+        }
+        if (File.Exists(Application.persistentDataPath + "/SentCrowScene2.stcw"))
+        {
+            File.Delete(Application.persistentDataPath + "/SentCrowScene2.stcw");
+        }
+        else
+            Debug.LogError("Нету сохранений для удаления");
+    }
+}
+
+[Serializable]
+class SaveData
+{
+    public int savedLastScene;          //данные на какой сцене был игрок
+    public bool[] savedIsFull;        //заполненность слотов в инвентаре 
+    public int[] savedChestItemId;      //предметы в инвентаре 
+    public float[] savedPlayerXY;       //позиция игрока 
+
+    public int[] savedIdObject;        //сохранённый Ид объекта 
+    public int[] savedIdObjectLocation;        //сохранённый Ид локации где был предмет
+    public float[] savedObjectPosX;    //его коорды 
+    public float[] savedObjectPosY;
+    public float[] savedObjectPosZ;
+    public bool[] savedObjectSetActive;    //его активность в сцене
+
+    public bool[] savedItemStoryActive;     //активность StoryItem
+
+    public bool[] savedNPCActive;      //активность NPC
+}
+
+
+
+
