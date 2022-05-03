@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Slot : MonoBehaviour
 {
+	[HideInInspector]
 	public GameObject chest;
+	[HideInInspector]
 	public ChestItemManager CIM;
+	[HideInInspector]
 	public Inventory inventory;
 	public int i;
 

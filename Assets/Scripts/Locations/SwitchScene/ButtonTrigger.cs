@@ -29,8 +29,7 @@ public class ButtonTrigger : MonoBehaviour
             }
 
             SC.sceneToLoad = SceneToLoadB;
-            SC.position = positionB;
-           
+            SC.position = positionB; 
         }
     }
 

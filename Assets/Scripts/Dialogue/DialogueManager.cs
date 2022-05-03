@@ -22,6 +22,8 @@ public class DialogueManager : MonoBehaviour
     public Queue<string> sentences;
     public Queue<string> answers;
 
+    public int numToSkipPastSentences;  // номер для скипа завершённых реплик
+
     private void Start()
     {
         sentences = new Queue<string>();        //очередь из вопросов
@@ -48,7 +50,30 @@ public class DialogueManager : MonoBehaviour
         {
             answers.Enqueue(answer);
         }
-        DisplayControlSentence(); 
+
+        ReloadReplic();
+    }
+
+    public void ReloadReplic()      //метод удаления из очереди прошедших диалогов
+    {
+        if (numToSkipPastSentences != 0)
+        {
+            for (int i = 0; i < numToSkipPastSentences; i++)
+            {
+                if (numToSkipPastSentences != 0)
+                { 
+                    string sentence = sentences.Dequeue();
+                    StopAllCoroutines();
+                    StartCoroutine(TypeSentence(sentence));
+                    DisplayNextAnswer();
+                }
+            }
+        }
+       
+        if (startQuest == false)
+        {
+            DisplayControlSentence();
+        }
     }
 
     public void DisplayControlSentence()
@@ -67,16 +92,18 @@ public class DialogueManager : MonoBehaviour
                 continueText = false;
                 startQuest = true;
             }
+
             DisplayNextSentence();
         }
     }
 
     public void DisplayNextSentence()
     {
-            string sentence = sentences.Dequeue();
-            StopAllCoroutines();
-            StartCoroutine(TypeSentence(sentence));
-            DisplayNextAnswer();     
+        string sentence = sentences.Dequeue();
+        DL.SkipSentences();
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(sentence));
+        DisplayNextAnswer();     
     }
 
     public void DisplayNextAnswer()
@@ -110,10 +137,9 @@ public class DialogueManager : MonoBehaviour
         boxAnim.SetBool("boxOpen", false);
     }
 
-    public void DMDLDT()
+    public void DMDLDT()        //метод для кнопки говорить
     {
         DL.SearchForTheRight();
-        ndtqs = DL.ndtqsl; //номер диалога для старта квеста (берётся автоматич)
     }
 
 }

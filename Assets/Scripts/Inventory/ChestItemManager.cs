@@ -9,7 +9,7 @@ public class ChestItemManager : MonoBehaviour
     public GameObject[] Items;                  //массив из предметов
 
     public int[] ChestItemId;                   //массив предметов в инвентаре
-
+    [HideInInspector]
     public Inventory inventory;
     public void Start()
     {

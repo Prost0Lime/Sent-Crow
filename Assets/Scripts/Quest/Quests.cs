@@ -6,30 +6,30 @@ public class Quests : MonoBehaviour
 {
     public DialogueManager DM;  //диалог менеджер
     public DialogueTrigger DT; //диалог триггер
-    public int numberDialogueStartQuest;
-    public int prizeNumberOrStop; //номер квеста для приза
-    private int num; //номер отданного предмета
+    public int numDialStartQuest;   //номер диалога для старта квеста
+    public int numDialStopQuest; //номер диалога для остановки квеста
 
     public GameObject[] prize;
 
-    public int[] items;
+    public int itemsInStart;        //колво предметов при старте
+    public List<int> items;         //ид предмета для квеста
 
-
+    [HideInInspector]
     public List<int> prizeId;
+    [HideInInspector]
     public List<float> prizeX;
 
     public void Start()
     {
-        DT.ndtqst = numberDialogueStartQuest; //присваивается номер диалога для старта квеста 
+        DT.ndtqst = numDialStartQuest; //присваивается номер диалога для старта квеста 
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (DM.startQuest == true)
         {
-            if (other.tag != "Player" && other.gameObject.GetComponent<Pickup>().id == items[num])
+            if ((other.tag != "Player") && (other.gameObject.GetComponent<Pickup>().id == items[0]))
             {
-                num ++;
                 Destroy(other.gameObject);
                 CheckQuest();
             }
@@ -38,17 +38,19 @@ public class Quests : MonoBehaviour
 
     public void CheckQuest()
     {
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < items.Count; i++)
         {
-            if (i == num)
+            if (i == 0)
             {
+                items.RemoveAt(0);
                 DM.continueText = true;
                 DT.TriggerDialogue();
                 break;
             }
+
         }
 
-        if (num == prizeNumberOrStop) //выдача призов
+        if ( DT.numToDeleteQueue == numDialStopQuest) //выдача призов
         {
             for (int i = 0; i < prize.Length; i++)
             {
@@ -57,7 +59,6 @@ public class Quests : MonoBehaviour
                     prize[i].SetActive(true);
                 }
             }
-
             StopQuest();  
         }
     }
@@ -65,12 +66,12 @@ public class Quests : MonoBehaviour
     public void StopQuest()
     {
         DM.continueText = true;
-        DM.DisplayControlSentence(); //переключает на некст диалог
         DM.startQuest = false;
-       
+        DT.continueText = true;
+        DT.startQuest = false;
     }
 
-    public void GetIdPrize()                     //метод получения ИД и коорд Х предмета перед его удалением со сцены
+    public void GetIdPrize()        //метод получения ИД и коорд Х предмета перед его удалением со сцены
     {
         prizeId.Clear();
         prizeX.Clear();

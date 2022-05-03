@@ -6,10 +6,14 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
+	[HideInInspector]
 	public Inventory inventory;
+	[HideInInspector]
 	public Spawn spawn;
     public GameObject slotButton;
-    public GameObject chest;
+	[HideInInspector]
+	public GameObject chest;
+	[HideInInspector]
 	public ChestItemManager CIM;
 
 	Animator chestAnim;

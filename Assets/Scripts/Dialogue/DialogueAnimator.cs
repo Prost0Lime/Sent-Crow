@@ -11,20 +11,20 @@ public class DialogueAnimator : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        dt.enterToTrigger = true;
 
         if (other.tag == "Player")
         {
+            dt.enterToTrigger = true;
             startAnim.SetBool("startOpen", true);
         }
     }
 
     public void OnTriggerExit2D(Collider2D other)
     {
-        dt.enterToTrigger = false;
 
         if (other.tag == "Player")
         {
+            dt.enterToTrigger = false;
             startAnim.SetBool("startOpen", false);
             dm.EndDialogue();
         }
