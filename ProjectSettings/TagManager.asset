@@ -13,6 +13,7 @@ TagManager:
   - DropSpawn
   - Object
   - UI Camera
+  - Audio
   layers:
   - Default
   - TransparentFX

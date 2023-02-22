@@ -7,23 +7,27 @@ public class SettingsMenu : MonoBehaviour
     public GameObject SettM;
     public Animator settAnim;
     private bool OpenTr;
-    public Camera cm;
+    public Camera UIcm;
+    
+    [HideInInspector]
+    public SaveMethod SM;
 
     private void Start()
     {
 
         SettM.SetActive(false);
         OpenTr = false;
-        cm = GameObject.FindGameObjectWithTag("UI Camera").GetComponent<Camera>();
+        UIcm = GameObject.FindGameObjectWithTag("UI Camera").GetComponent<Camera>();
+        SM = GameObject.FindGameObjectWithTag("SaveMethod").GetComponent<SaveMethod>();
+
     }
 
-    [System.Obsolete]
     public void SettingsOpen()
     {
         
         if (OpenTr == false)        //открытие
         {
-            cm.orthographicSize = 0.1f;
+            UIcm.orthographicSize = 0.1f;
             OpenTr = true;
             settAnim.SetBool("AnimTrgg", true);
             SettM.SetActive(true);
@@ -31,10 +35,11 @@ public class SettingsMenu : MonoBehaviour
         }
         else if (OpenTr == true)    //закрытие
         {
-            cm.orthographicSize = 5f;
+            UIcm.orthographicSize = 5f;
             OpenTr = false;
             settAnim.SetBool("AnimTrgg", false);
             SettM.SetActive(false);
+            SM.SaveSettings();
   
 
         }

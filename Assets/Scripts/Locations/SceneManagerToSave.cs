@@ -39,6 +39,8 @@ public class SceneManagerToSave : MonoBehaviour
 
     public int[] ItemsCount;        //колво предметов для удаления из кввеста при загрузке
 
+    public float Volume;      //Громкость музыки
+
     void Start()
     {
         KC = GameObject.FindGameObjectWithTag("Player").GetComponent<KarlController>();
@@ -64,6 +66,11 @@ public class SceneManagerToSave : MonoBehaviour
         PlayerXY = new float[2] { 0, 0 };
         PlayerXY[0] = KC.transform.position.x;          //передаёт координаты в saveMethod для сохранения
         PlayerXY[1] = KC.transform.position.y;
+    }
+
+    public void SaveVolume()    //Сохранение громкости
+    {
+        Volume = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioSource>().volume;
     }
 
     public void LoadObjInList()             //получение всех объектов и добавление их в лист
@@ -165,7 +172,6 @@ public class SceneManagerToSave : MonoBehaviour
     {       
         LoadObjInList();
 
-
         for (int i = 0; i < itemStories.Count; i++)         // загрузка ИД и коорд объектов в сториайтеме
         {
             itemStories[i].SetActive(true);
@@ -256,9 +262,16 @@ public class SceneManagerToSave : MonoBehaviour
 
             NPC[t].GetComponent<DialogueTrigger>().numToDeleteQueue = NPCSkipDialogue[t];   //присвоение данных по квесту
             NPC[t].GetComponent<DialogueTrigger>().startQuest = NPCStartQuest[t];
-            NPC[t].GetComponent<DialogueTrigger>().continueText = NPCContinueText[t];               
+            NPC[t].GetComponent<DialogueTrigger>().continueText = NPCContinueText[t];
 
-            NPC[t].SetActive(NPCActive[t]);     //активность npc в соответствии с сохр          
+            NPC[t].SetActive(NPCActive[t]);     //активность npc в соответствии с сохр
+
+            
         }
+        
+    }
+    public void LoadSettingsSMTS() // метод загрузки насроек
+    {
+        GameObject.FindGameObjectWithTag("Audio").GetComponent<VolumeValue>().musicVolume = Volume;
     }
 }

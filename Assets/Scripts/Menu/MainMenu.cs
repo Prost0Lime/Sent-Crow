@@ -17,6 +17,25 @@ public class MainMenu : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         SM = GameObject.FindGameObjectWithTag("SaveMethod").GetComponent<SaveMethod>();
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            SM.LoadSettings();
+        }
+    }
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            if (SM.LoadComplite == true)
+            {
+                anim.speed = 1;
+            }
+            else
+            {
+                anim.speed = 0;
+            }
+        }
     }
 
     public void goToMainMenu()
@@ -38,8 +57,9 @@ public class MainMenu : MonoBehaviour
 
     public void LoadGame()
     {
+
+        position = playerStorage.initialValue;              //приём сохранённых координат для 
         anim.SetTrigger("Fade");
-        position = playerStorage.initialValue;              //приём сохранённых координат для перемещения
     }
 
     public void doExitGame()
@@ -61,4 +81,5 @@ public class MainMenu : MonoBehaviour
         }
             SceneManager.LoadScene(SceneMenu);
     }
+
 }

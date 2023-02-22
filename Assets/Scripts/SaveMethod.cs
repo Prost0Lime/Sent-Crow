@@ -42,6 +42,9 @@ public class SaveMethod : MonoBehaviour
     public bool[] NPCContinueTextToSave;
     public int[] QuestItemToSave;
 
+    public float VolumeToSave;    //Громкость музыки
+
+    public bool LoadComplite;       //переменная для выключения fade после загрузки
 
     public void Start()
     {
@@ -49,8 +52,9 @@ public class SaveMethod : MonoBehaviour
         {
             inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
             CIM = GameObject.FindGameObjectWithTag("Chest").GetComponent<ChestItemManager>();
-            SMTS = GameObject.FindGameObjectWithTag("SMTS").GetComponent<SceneManagerToSave>();
         }
+        SMTS = GameObject.FindGameObjectWithTag("SMTS").GetComponent<SceneManagerToSave>();
+        LoadComplite = false;
     }
 
     public void SaveGame()                                              //Сохранение данных
@@ -84,11 +88,11 @@ public class SaveMethod : MonoBehaviour
             SMTS.SaveObjects();
 
             SaveScene();
-
-            bf.Serialize(file, data);
-            file.Close();
-            Debug.Log("Игра сохранена");
         }
+
+        bf.Serialize(file, data);
+        file.Close();
+        Debug.Log("Игра сохранена");
     }
     public void SaveScene()
     {
@@ -127,6 +131,25 @@ public class SaveMethod : MonoBehaviour
         bf.Serialize(file, data);
         file.Close();
         Debug.Log("Сцена сохранена");
+
+        SaveSettings();
+    }
+
+    public void SaveSettings()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/SentCrowSettings.stcw");
+        SaveData data = new SaveData();
+
+        //--------------------для сохранения громкости на разных сценах---------
+        SMTS.SaveVolume();
+        VolumeToSave = SMTS.Volume;
+        data.savedVolume = VolumeToSave;
+
+        bf.Serialize(file, data);
+        file.Close();
+        Debug.Log("Настройки сохранены");
+
     }
 
     public void LoadGame()                                              //загрузка
@@ -148,12 +171,13 @@ public class SaveMethod : MonoBehaviour
                     mainmenuFade.SceneMenu = LastSceneToSave;
                     LoadPos();
                     mainmenuFade.LoadGame();
+
                 }
 
-                else if (mainmenuFade == null)       //особо не думал но вроде лишнее
-                {
-                    LoadPos();
-                }
+                /*                else if (mainmenuFade == null)       //особо не думал но вроде лишнее
+                                {
+                                    LoadPos();
+                                }*/
             }
 
             void LoadPos()  //локальный метод для загрузки координат для смены сцены
@@ -172,14 +196,20 @@ public class SaveMethod : MonoBehaviour
             ChestItemIdToSave = data.savedChestItemId;
             CIM.ChestItemId = ChestItemIdToSave;
             CIM.ReloadItem();
-
+            
             LoadScene();        //метод загрузки по сценам
+            LoadSettings();     //метод загрузки настроек
 
+            LoadComplite = true;
             Debug.Log("Игра загружена");
         }
         else
+        {
+            LoadComplite = true;
             Debug.LogError("Нечего загружать!");
-      
+        }
+            
+
     }
 
     public void LoadScene()         //метод загрузки объектов сцены
@@ -224,6 +254,25 @@ public class SaveMethod : MonoBehaviour
             SMTS.LoadSavedObjects();
             Debug.Log("Сцена загружена");
         }
+
+    }
+
+    public void LoadSettings()
+    {
+        if (File.Exists(Application.persistentDataPath + "/SentCrowSettings.stcw"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/SentCrowSettings.stcw", FileMode.Open);
+            SaveData data = (SaveData)bf.Deserialize(file);
+            file.Close();
+            
+            //--------------------Параметры настроек Громкость---------------
+            VolumeToSave = data.savedVolume;
+            SMTS.Volume = VolumeToSave;
+            SMTS.LoadSettingsSMTS();
+
+            Debug.Log("Настройки загружены");
+        }
     }
 
     public void ResetData()                                             //сброс
@@ -263,6 +312,8 @@ class SaveData
     public bool[] savedNPCStartQuest;   //номер диалога для старта квеста
     public bool[] savedNPCContinueText; //статус для продолжения диалога
     public int[] savedQuestItem;        //предметы необходимые для квеста
+
+    public float savedVolume; 
 
 }
 
