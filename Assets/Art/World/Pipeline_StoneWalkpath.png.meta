@@ -72,6 +72,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -496,6 +497,23 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Pipeline_StoneWalkpath_15: -862530557615411191
+      Pipeline_StoneWalkpath_3: 4622140815304628736
+      Pipeline_StoneWalkpath_4: -1256192708038730424
+      Pipeline_StoneWalkpath_14: -8660361982697020089
+      Pipeline_StoneWalkpath_1: -2243680866200452403
+      Pipeline_StoneWalkpath_9: -4563498851045504136
+      Pipeline_StoneWalkpath_12: -5828743724710129091
+      Pipeline_StoneWalkpath_2: 8218594754092301031
+      Pipeline_StoneWalkpath_7: -8770930631672181325
+      Pipeline_StoneWalkpath_10: 5245184185580973856
+      Pipeline_StoneWalkpath_6: -7891735890183331047
+      Pipeline_StoneWalkpath_5: -2097421789461258261
+      Pipeline_StoneWalkpath_13: -6591406450595845294
+      Pipeline_StoneWalkpath_11: -3505096889162205481
+      Pipeline_StoneWalkpath_8: 1435843114160714799
+      Pipeline_StoneWalkpath_0: 2464431661349095767
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

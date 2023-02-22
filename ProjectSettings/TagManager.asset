@@ -12,6 +12,7 @@ TagManager:
   - SaveMethod
   - DropSpawn
   - Object
+  - UI Camera
   layers:
   - Default
   - TransparentFX
