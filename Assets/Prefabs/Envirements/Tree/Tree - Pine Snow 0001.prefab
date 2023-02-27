@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9220320125963002876}
   - component: {fileID: 6656679410106745344}
   - component: {fileID: 1977564398570773161}
+  - component: {fileID: 7456228523321219964}
   m_Layer: 0
   m_Name: Tree - Pine Snow 0001
   m_TagString: Untagged
@@ -31,6 +32,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.07731986, y: -7.1839666, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -46,6 +48,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -54,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,7 +91,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 1
 --- !u!95 &921740747137730149
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -101,6 +104,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -171,3 +175,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1879196715f06234ca2ecbd50c9dac40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7456228523321219964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8870313464751894439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.065428674, y: -0.014156818, z: 0}
+  - {x: -0.054847717, y: 0.30767012, z: 0}
+  - {x: -0.26944438, y: 0.30026102, z: 0}
+  - {x: -0.36926258, y: 0.3217063, z: 0}
+  - {x: -0.47223175, y: 0.3663702, z: 0}
+  - {x: -0.56774133, y: 0.42163038, z: 0}
+  - {x: -0.45868355, y: 0.5142822, z: 0}
+  - {x: -0.44199896, y: 0.781384, z: 0}
+  - {x: -0.42786986, y: 0.9627824, z: 0}
+  - {x: -0.2651081, y: 1.3173542, z: 0}
+  - {x: -0.19413966, y: 1.5472541, z: 0}
+  - {x: -0.109943, y: 1.6861391, z: 0}
+  - {x: -0.10558799, y: 1.8499093, z: 0}
+  - {x: -0.06944564, y: 1.9461546, z: 0}
+  - {x: -0.033353686, y: 2.0657158, z: 0}
+  - {x: 0.048112154, y: 1.870265, z: 0}
+  - {x: 0.02635777, y: 1.7909431, z: 0}
+  - {x: 0.07561803, y: 1.7025161, z: 0}
+  - {x: 0.13621277, y: 1.599, z: 0}
+  - {x: 0.14522499, y: 1.5039501, z: 0}
+  - {x: 0.201855, y: 1.3641925, z: 0}
+  - {x: 0.29755777, y: 1.2378001, z: 0}
+  - {x: 0.35593575, y: 1.0626988, z: 0}
+  - {x: 0.3957343, y: 0.9251046, z: 0}
+  - {x: 0.39197266, y: 0.76519775, z: 0}
+  - {x: 0.43553764, y: 0.5803828, z: 0}
+  - {x: 0.53784513, y: 0.44745255, z: 0}
+  - {x: 0.46408963, y: 0.3921528, z: 0}
+  - {x: 0.3280932, y: 0.35680056, z: 0}
+  - {x: 0.2772789, y: 0.30531454, z: 0}
+  - {x: 0.12540132, y: 0.3025961, z: 0}
+  - {x: 0.06248632, y: 0.27194643, z: 0}
+  - {x: 0.09684813, y: -0.014156342, z: 0}
+  m_ShapePathHash: 1230395064
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 42366

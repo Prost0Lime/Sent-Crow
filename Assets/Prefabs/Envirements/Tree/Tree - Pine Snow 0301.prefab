@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9200233506502559816}
   - component: {fileID: 7667306465577217509}
   - component: {fileID: 3102006852525506941}
+  - component: {fileID: 2575174277728835462}
   m_Layer: 0
   m_Name: Tree - Pine Snow 0301
   m_TagString: Untagged
@@ -31,6 +32,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.72, y: -7.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -46,6 +48,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -54,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,7 +91,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 1
 --- !u!95 &3119350972000555395
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -101,6 +104,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -171,3 +175,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1879196715f06234ca2ecbd50c9dac40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2575174277728835462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417407676016784232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.05155611, y: -0.0025873184, z: 0}
+  - {x: -0.01548934, y: 0.10813522, z: 0}
+  - {x: -0.09419185, y: 0.07922411, z: 0}
+  - {x: -0.07331163, y: 0.18683767, z: 0}
+  - {x: -0.17289436, y: 0.17880678, z: 0}
+  - {x: -0.095798075, y: 0.31051302, z: 0}
+  - {x: -0.03155142, y: 0.56910706, z: 0}
+  - {x: 0.05398798, y: 0.80986595, z: 0}
+  - {x: 0.08867782, y: 0.6396117, z: 0}
+  - {x: 0.12585318, y: 0.5273471, z: 0}
+  - {x: 0.106579065, y: 0.3908224, z: 0}
+  - {x: 0.14191556, y: 0.25429726, z: 0}
+  - {x: 0.17885756, y: 0.1386528, z: 0}
+  - {x: 0.043938994, y: 0.12740946, z: 0}
+  - {x: 0.017205834, y: -0.0055098534, z: 0}
+  m_ShapePathHash: -1318059481
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -32690

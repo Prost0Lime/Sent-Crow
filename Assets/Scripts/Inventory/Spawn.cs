@@ -5,15 +5,20 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
+    [HideInInspector]
     public SceneManagerToSave SMTS;
 	public GameObject item;
     public int IdItemInventory;
+    [HideInInspector]
     public Pickup pickup;
 
+    [HideInInspector]
     private Transform player;
+    [HideInInspector]
     private KarlController KC;
     public float distance = 0.5f;
 
+    [HideInInspector]
     public LocationSpawnObjects LSO;
 
     private void Start()
@@ -36,6 +41,10 @@ public class Spawn : MonoBehaviour
                 pickup.PickupIdSpawnLocation = i;       //присваивание ИД локации к объекту где он заспавнился
                 Instantiate(item, playerPos, Quaternion.identity, LSO.ParentLocation[i].transform);
             }
+        }
+        if (pickup.id == 3) // провека, если это лампа, то переключить на анимации без ламп
+        {
+            KC.LampOff();
         }
     }   
 }

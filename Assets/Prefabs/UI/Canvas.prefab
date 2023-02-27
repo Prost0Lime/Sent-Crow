@@ -2304,6 +2304,7 @@ MonoBehaviour:
   - {fileID: 7094058068147531651, guid: 3068b1af212b46542a0afd64b2a3a798, type: 3}
   - {fileID: 4976730040678752466, guid: 0dc979ba60874154fb23fa6928e59315, type: 3}
   - {fileID: 4976730040678752466, guid: 3a471f1179331d84f855896aac86fc08, type: 3}
+  - {fileID: 4976730040678752466, guid: 97f4f0b78a57fe548ae920373b01f4ce, type: 3}
   ChestItemId: 
   inventory: {fileID: 0}
 --- !u!1 &1106245049312638340
@@ -5099,6 +5100,7 @@ MonoBehaviour:
   - {fileID: 7738087352222640247, guid: 6a64b04afc128304b94f3ce978c135b4, type: 3}
   - {fileID: 7860573907778803214, guid: fc7c0e019b3f8b44c918c81711179669, type: 3}
   - {fileID: 7860573907778803214, guid: 42cdc247c2f471949b6d523a9ce430e3, type: 3}
+  - {fileID: 8201742955244628829, guid: 9e7f13558297a4b4cbd98d137473e865, type: 3}
   OBJ: []
   idObject: 
   idLocationForSpawn: 

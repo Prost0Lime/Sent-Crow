@@ -9,7 +9,7 @@ public class myLog : MonoBehaviour
     void Start()
     {
         Debug.Log("Sent-Crow");
-        Debug.Log("v.0.032");
+        Debug.Log("v.0.054");
     }
 
     void OnEnable()

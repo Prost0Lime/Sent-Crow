@@ -197,7 +197,7 @@ public class SceneManagerToSave : MonoBehaviour
             //---------------------отчистка сцены от всех предметов
         for (int i = 0; i < OBJ.Count; i++)         
         {
-            Destroy(OBJ[i]);
+            DestroyImmediate(OBJ[i], true);
         }
        
         //---------------------спавн объектов на сцену

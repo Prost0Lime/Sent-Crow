@@ -67,4 +67,14 @@ public class KarlController : MonoBehaviour
     { 
         animator.SetBool("Check", false);
     }
+
+    public void LampOn()
+    {
+        animator.SetBool("Lamp", true);
+    }
+
+    public void LampOff()
+    {
+        animator.SetBool("Lamp", false);
+    }
 }
