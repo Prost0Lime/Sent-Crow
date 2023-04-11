@@ -37,6 +37,8 @@ public class SaveMethod : MonoBehaviour
 
     public bool[] NPCActiveToSave;      //активность NPC
 
+    public bool[] TeleportActiveToSave;      //активность телепортов
+
     public int[] NPCSkipDialogueToSave; //данные диалога и квеста
     public bool[] NPCStartQuestToSave;
     public bool[] NPCContinueTextToSave;
@@ -118,6 +120,9 @@ public class SaveMethod : MonoBehaviour
 
         NPCActiveToSave = SMTS.NPCActive;                   //сохранение активности NPC
         data.savedNPCActive = NPCActiveToSave;
+
+        TeleportActiveToSave = SMTS.teleportsActive;                   //сохранение активности NPC
+        data.savedTeleportActive = TeleportActiveToSave;
 
         NPCSkipDialogueToSave = SMTS.NPCSkipDialogue;   //сохранение диалоговых и квестовых данных 
         NPCStartQuestToSave = SMTS.NPCStartQuest;
@@ -241,6 +246,9 @@ public class SaveMethod : MonoBehaviour
             NPCActiveToSave = data.savedNPCActive;       //загрузка активности NPC
             SMTS.NPCActive = NPCActiveToSave;
 
+            TeleportActiveToSave = data.savedTeleportActive;       //загрузка активности телепортов
+            SMTS.teleportsActive = TeleportActiveToSave;
+
             NPCSkipDialogueToSave = data.savedNPCSkipDialogue;  //загрузка диалоговых и квестовых данных 
             NPCStartQuestToSave = data.savedNPCStartQuest;
             NPCContinueTextToSave = data.savedNPCContinueText;
@@ -307,6 +315,8 @@ class SaveData
     public bool[] savedItemStoryActive;     //активность StoryItem
 
     public bool[] savedNPCActive;      //активность NPC
+
+    public bool[] savedTeleportActive;      //активность телепортов
 
     public int[] savedNPCSkipDialogue;  //колво диалогов для скипа
     public bool[] savedNPCStartQuest;   //номер диалога для старта квеста

@@ -91,7 +91,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 1
 --- !u!95 &3119350972000555395
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -108,7 +108,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!61 &9200233506502559816
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -212,4 +212,4 @@ MonoBehaviour:
   - {x: 0.017205834, y: -0.0055098534, z: 0}
   m_ShapePathHash: -1318059481
   m_Mesh: {fileID: 0}
-  m_InstanceId: -32690
+  m_InstanceId: 141128

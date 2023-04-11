@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7618671477544439032}
   - component: {fileID: 2257952133261235065}
   - component: {fileID: 2257952133261235066}
+  - component: {fileID: 3686057332717993637}
   m_Layer: 0
   m_Name: ObjectToSwitch
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2257952133261235068}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.83, y: -8.57, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -148,3 +149,17 @@ MonoBehaviour:
   ThisLocation: {fileID: 0}
   otherLocations: []
   BttnOnSwitchOn: 0
+--- !u!114 &3686057332717993637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2257952133261235068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8292d2eb75c7c704e9631e4641f265bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TeleportIdSpawnLocation: 0
+  TeleportScene: 0

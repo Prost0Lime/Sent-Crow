@@ -28,7 +28,10 @@ public class SceneManagerToSave : MonoBehaviour
     public bool[] ObjectSetActive;       //массив активированности объектов для сохранения
 
     public List<GameObject> itemStories;            //лист итемсторисов на сцене
-    public bool[] itemStoriesActive;            //массив активности итемсторисов 
+    public bool[] itemStoriesActive;            //массив активности итемсторисов
+    
+    public List<GameObject> teleports;            //лист телепортов на сцене
+    public bool[] teleportsActive;            //массив активности телепортов
 
     public List<GameObject> NPC;            //лист нпс на сцене
     public bool[] NPCActive;                //массив активности нпс
@@ -78,6 +81,7 @@ public class SceneManagerToSave : MonoBehaviour
         OBJ.Clear();
         itemStories.Clear();
         NPC.Clear();
+        teleports.Clear();
 
         GameObject[] arrayObj = Resources.FindObjectsOfTypeAll<GameObject>();
         for (int i = 0; i < arrayObj.Length; i++)
@@ -97,12 +101,21 @@ public class SceneManagerToSave : MonoBehaviour
                     itemStories.Add(arrayObj[i]);           //копирование из массива в лист
                 }
             }
+            itemStories.Sort((x, y) => x.name.CompareTo(y.name));
 
             if (arrayObj[i].GetComponent<DialogueTrigger>())        //проверка на NPC
             {
                 if (arrayObj[i].transform.position.x != arrayObj[i].transform.position.y)
                 {
                     NPC.Add(arrayObj[i]);
+                }
+            }
+
+            if (arrayObj[i].GetComponent<TeleportSave>())        //проверка на телепорт
+            {
+                if (arrayObj[i].transform.position.x != arrayObj[i].transform.position.y)
+                {
+                    teleports.Add(arrayObj[i]);
                 }
             }
         }
@@ -166,6 +179,14 @@ public class SceneManagerToSave : MonoBehaviour
             ItemsCount[i] = NPC[i].GetComponent<Quests>().itemsInStart - NPC[i].GetComponent<Quests>().items.Count;     //количество предметов общее - колво предметов на данный момент 
 
         }
+
+        teleportsActive = new bool[teleports.Count];
+
+        for (int i = 0; i < teleports.Count; i++)
+        {
+            teleportsActive[i] = teleports[i].activeInHierarchy;        //получение активности телепортов
+        }
+
     }
 
     public void LoadSavedObjects()      //загрузка объектов на сцену
@@ -267,6 +288,11 @@ public class SceneManagerToSave : MonoBehaviour
             NPC[t].SetActive(NPCActive[t]);     //активность npc в соответствии с сохр
 
             
+        }
+
+        for (int t = 0; t < teleports.Count; t++)
+        {
+            teleports[t].SetActive(teleportsActive[t]); //активность телепортов в соответствии с сохр
         }
         
     }

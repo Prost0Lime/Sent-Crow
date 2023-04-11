@@ -8,7 +8,8 @@ public class SettingsMenu : MonoBehaviour
     public Animator settAnim;
     private bool OpenTr;
     public Camera UIcm;
-    
+    public ParticleSystem PS;
+
     [HideInInspector]
     public SaveMethod SM;
 
@@ -27,22 +28,32 @@ public class SettingsMenu : MonoBehaviour
         
         if (OpenTr == false)        //открытие
         {
-            UIcm.orthographicSize = 0.1f;
+           // UIcm.orthographicSize = 0.1f;
             OpenTr = true;
             settAnim.SetBool("AnimTrgg", true);
             SettM.SetActive(true);
-            
+            Invoke("ParticleOff", 1f);
+
+
+
         }
         else if (OpenTr == true)    //закрытие
         {
-            UIcm.orthographicSize = 5f;
+            // UIcm.orthographicSize = 5f;
             OpenTr = false;
             settAnim.SetBool("AnimTrgg", false);
             SettM.SetActive(false);
             SM.SaveSettings();
+            PS.Play();
   
 
         }
+    }
+
+    public void ParticleOff()
+    {
+        PS.Clear();
+        PS.Pause();
     }
 }
 

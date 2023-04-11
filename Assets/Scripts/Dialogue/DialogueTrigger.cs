@@ -8,7 +8,7 @@ public class DialogueTrigger : MonoBehaviour
     public DialogueManager DM;
     [HideInInspector]
     public bool enterToTrigger;
-
+    [HideInInspector]
     public int ndtqst; //номер диалога для старта квеста авто
     [HideInInspector]
     public int numToDeleteQueue; //получение скипнутых реплик авто
