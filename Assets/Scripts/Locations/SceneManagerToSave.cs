@@ -73,7 +73,7 @@ public class SceneManagerToSave : MonoBehaviour
 
     public void SaveVolume()    //Сохранение громкости
     {
-        Volume = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioSource>().volume;
+        Volume = GameObject.FindGameObjectWithTag("AM").GetComponent<VolumeValue>().musicVolume;
     }
 
     public void LoadObjInList()             //получение всех объектов и добавление их в лист
@@ -298,6 +298,6 @@ public class SceneManagerToSave : MonoBehaviour
     }
     public void LoadSettingsSMTS() // метод загрузки насроек
     {
-        GameObject.FindGameObjectWithTag("Audio").GetComponent<VolumeValue>().musicVolume = Volume;
+        GameObject.FindGameObjectWithTag("AM").GetComponent<VolumeValue>().musicVolume = Volume;
     }
 }

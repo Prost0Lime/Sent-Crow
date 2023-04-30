@@ -17,6 +17,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/thirdScene.unity
     guid: df69ca9c3fab5c343bd6306448c2f041
+  - enabled: 1
+    path: Assets/Scenes/fourthScene.unity
+    guid: 4a3fa891620b8d64d9e505d20fb00acb
+  - enabled: 1
+    path: Assets/Scenes/fifthScene.unity
+    guid: 9e47d8a5cf858874a835e514ed3a6535
+  - enabled: 1
+    path: Assets/Scenes/sixthScene.unity
+    guid: 9fc805104e89ae5458ce1bc4c6ec646d
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 5f787559ac5160347acf5b4ba9b40a9d, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 8be37b1fc04119d4789bbfbbf360eaa5, type: 2}

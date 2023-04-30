@@ -7,6 +7,13 @@ public class DialogueAnimator : MonoBehaviour
     public Animator startAnim;
     public DialogueManager dm;
     public DialogueTrigger dt;
+    [HideInInspector]
+    public SoundManager soundManager;
+
+    private void Start()
+    {
+        soundManager = GameObject.FindGameObjectWithTag("AM").GetComponent<SoundManager>();
+    }
 
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -16,6 +23,8 @@ public class DialogueAnimator : MonoBehaviour
         {
             dt.enterToTrigger = true;
             startAnim.SetBool("startOpen", true);
+            soundManager.AudioSound2.clip = soundManager.Dialogue;
+            soundManager.AudioSound2.Play();
         }
     }
 

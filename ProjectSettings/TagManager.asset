@@ -14,6 +14,7 @@ TagManager:
   - Object
   - UI Camera
   - Audio
+  - AM
   layers:
   - Default
   - TransparentFX

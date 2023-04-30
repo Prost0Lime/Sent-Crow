@@ -5,10 +5,22 @@ using UnityEngine;
 public class Firefly : MonoBehaviour
 {
     public Animator anim;
+    [HideInInspector]
+    public SoundManager soundManager;
 
-   public void SeatTrigger()
+    private void Start()
+    {
+        soundManager = GameObject.FindGameObjectWithTag("AM").GetComponent<SoundManager>();
+    }
+
+    public void SeatTrigger()
     {
         anim.SetTrigger("SeatTr");
+    }
 
+    public void FlyAudio()
+    {
+        soundManager.AudioSound2.clip = soundManager.Firefly;
+        soundManager.AudioSound2.Play();
     }
 }

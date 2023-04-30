@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class VolumeValue : MonoBehaviour
 {
-    private AudioSource audioSrc;
+    public AudioSource[] AudioTheme;
     public float musicVolume = 1f;
 
-    void Start()
+    private void Update()
     {
-        audioSrc = GetComponent<AudioSource>();
+        for (int i = 0; i < AudioTheme.Length; i++)
+        {
+            AudioTheme[i].volume = musicVolume;
+        }
     }
 
-    void Update()
-    {
-        audioSrc.volume = musicVolume;
-    }
 
     public void SetVolume(float vol)
     {
         musicVolume = vol;
+        
     }
 }

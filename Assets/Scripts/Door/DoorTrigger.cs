@@ -10,6 +10,15 @@ public class DoorTrigger : MonoBehaviour
     public bool DoorIsOpen; // статус по умолчанию (закрыто или открыто)
     private bool YouStayOnTrigger; //для открытия двери у которой стоишь
 
+    [HideInInspector]
+    public SoundManager soundManager;
+
+    private void Start()
+    {
+        soundManager = GameObject.FindGameObjectWithTag("AM").GetComponent<SoundManager>();
+
+    }
+
     public void Update() //обнаруживает изменение статуса двери на тру
     {
         if ((DoorM.triggerOpen == true) && (YouStayOnTrigger == true))  
@@ -33,6 +42,8 @@ public class DoorTrigger : MonoBehaviour
         {
             DoorPrefab.GetComponent<BoxCollider2D>().enabled = false;
             DoorPrefab.GetComponent<SpriteRenderer>().enabled = false;
+            soundManager.AudioSound2.clip = soundManager.Door;
+            soundManager.AudioSound2.Play();
         }
     }
     
@@ -50,6 +61,8 @@ public class DoorTrigger : MonoBehaviour
         {
             DoorPrefab.GetComponent<BoxCollider2D>().enabled = true;
             DoorPrefab.GetComponent<SpriteRenderer>().enabled = true;
+            soundManager.AudioSound2.clip = soundManager.Door;
+            soundManager.AudioSound2.Play();
         }
     }  
 }

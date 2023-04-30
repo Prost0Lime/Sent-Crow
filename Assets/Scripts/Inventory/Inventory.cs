@@ -9,6 +9,9 @@ public class Inventory : MonoBehaviour
     public GameObject inventory;
     public bool inventoryOn;
 
+    [HideInInspector]
+    public SoundManager soundManager;
+
     float timerDisplay;
     public float displayTime = 4.0f;
 
@@ -19,6 +22,7 @@ public class Inventory : MonoBehaviour
         inventoryOn = false;
         inventory.SetActive(false);
         timerDisplay = -1.0f;
+        soundManager = GameObject.FindGameObjectWithTag("AM").GetComponent<SoundManager>();
     }
     void Update()       //автоскрытие инвентаря
     {
@@ -42,6 +46,9 @@ public class Inventory : MonoBehaviour
             inventory.SetActive(true);
             invent.SetBool("openInventory", true);
             timerDisplay = displayTime;
+            soundManager.AudioSound2.clip = soundManager.Chest;
+            soundManager.AudioSound2.Play();
+
         }
         else if (inventoryOn == true)
         {

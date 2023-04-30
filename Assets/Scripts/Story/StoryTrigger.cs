@@ -17,11 +17,14 @@ public class StoryTrigger : MonoBehaviour
     public GameObject[] itemStory; 
 
     public List<int> itemStoryId; 
-    public List<float> itemStoryX; 
+    public List<float> itemStoryX;
+    [HideInInspector]
+    public SoundManager soundManager;
 
     public void Start()
     {
         storyDisplayAnim = GameObject.FindGameObjectWithTag("StoryD").GetComponent<Animator>();
+        soundManager = GameObject.FindGameObjectWithTag("AM").GetComponent<SoundManager>();
     }
 
     public void GetIdItem()                     //метод получения ИД и коорд Х предмета перед его удалением со сцены
@@ -45,6 +48,9 @@ public class StoryTrigger : MonoBehaviour
         {
             storyDisplayAnim.SetBool("StoryOpen", true);
             SM.StartStroy(story);
+            soundManager.AudioSound2.clip = soundManager.StoryItem;
+            soundManager.AudioSound2.Play();
+
 
             Invoke("TimeOff", timeActive);
         }

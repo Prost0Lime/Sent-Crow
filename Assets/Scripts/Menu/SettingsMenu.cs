@@ -12,15 +12,18 @@ public class SettingsMenu : MonoBehaviour
 
     [HideInInspector]
     public SaveMethod SM;
+    [HideInInspector]
+    public SoundManager soundManager;
 
     private void Start()
     {
-
         SettM.SetActive(false);
         OpenTr = false;
         UIcm = GameObject.FindGameObjectWithTag("UI Camera").GetComponent<Camera>();
         SM = GameObject.FindGameObjectWithTag("SaveMethod").GetComponent<SaveMethod>();
-
+        soundManager = GameObject.FindGameObjectWithTag("AM").GetComponent<SoundManager>();
+        soundManager.AudioSound.clip = soundManager.Shesternya;
+        soundManager.AudioSound.Play();
     }
 
     public void SettingsOpen()

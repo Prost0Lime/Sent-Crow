@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8844186970520410047}
   - component: {fileID: 1542380715}
   - component: {fileID: 6160595515985561406}
+  - component: {fileID: 1769022847898954980}
   m_Layer: 8
   m_Name: Karl
   m_TagString: Player
@@ -128,9 +129,10 @@ MonoBehaviour:
   hor: 0
   ver: 0
   pos: {fileID: 0}
+  soundManager: {fileID: 0}
 --- !u!95 &4951064981071467738
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -147,7 +149,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!70 &8844186970520410047
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -186,6 +188,7 @@ MonoBehaviour:
   - {fileID: 0}
   inventory: {fileID: 0}
   inventoryOn: 0
+  soundManager: {fileID: 0}
   displayTime: 4
   invent: {fileID: 0}
 --- !u!114 &6160595515985561406
@@ -212,6 +215,7 @@ MonoBehaviour:
   m_LightCookieSprite: {fileID: 21300000, guid: 119f93d0bcbf1e743bf5fcf237507d39, type: 3}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 0
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
@@ -266,3 +270,11 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!81 &1769022847898954980
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8233625325120365275}
+  m_Enabled: 1

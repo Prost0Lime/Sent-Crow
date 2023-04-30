@@ -8,6 +8,6 @@ public class SliderValue : MonoBehaviour
     public Slider slider;
     void Start()
     {
-        slider.value = GameObject.FindGameObjectWithTag("Audio").GetComponent<VolumeValue>().musicVolume;
+        slider.value = GameObject.FindGameObjectWithTag("AM").GetComponent<VolumeValue>().musicVolume;
     }
 }

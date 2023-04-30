@@ -48,6 +48,9 @@ public class SaveMethod : MonoBehaviour
 
     public bool LoadComplite;       //переменная для выключения fade после загрузки
 
+    [HideInInspector]
+    public SoundManager soundManager;
+
     public void Start()
     {
         if (mainmenuFade == null)           //для устранения ошибок при запуске в меню
@@ -57,6 +60,7 @@ public class SaveMethod : MonoBehaviour
         }
         SMTS = GameObject.FindGameObjectWithTag("SMTS").GetComponent<SceneManagerToSave>();
         LoadComplite = false;
+        soundManager = GameObject.FindGameObjectWithTag("AM").GetComponent<SoundManager>();
     }
 
     public void SaveGame()                                              //Сохранение данных
@@ -285,6 +289,9 @@ public class SaveMethod : MonoBehaviour
 
     public void ResetData()                                             //сброс
     {
+
+        soundManager.AudioSound2.clip = soundManager.PauseButton;
+        soundManager.AudioSound2.Play();
         if (Directory.GetFiles(Application.persistentDataPath).Length == 0)
         {
             Debug.LogError("Нету сохранений для удаления");

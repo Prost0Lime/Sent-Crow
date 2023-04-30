@@ -11,8 +11,12 @@ public class ChestItemManager : MonoBehaviour
     public int[] ChestItemId;                   //массив предметов в инвентаре
     [HideInInspector]
     public Inventory inventory;
+    [HideInInspector]
+    public SoundManager soundManager;
+
     public void Start()
     {
+        soundManager = GameObject.FindGameObjectWithTag("AM").GetComponent<SoundManager>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         ChestItemId = new int[6] { 0, 0, 0, 0, 0, 0 };                      //массив предметов в инвентаре
 
@@ -35,5 +39,10 @@ public class ChestItemManager : MonoBehaviour
                 }
             }
         }
+    }
+    public void Chest()
+    {
+        soundManager.AudioSound2.clip = soundManager.Chest;
+        soundManager.AudioSound2.Play();
     }
 }

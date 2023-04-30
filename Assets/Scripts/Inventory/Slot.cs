@@ -11,11 +11,12 @@ public class Slot : MonoBehaviour
 	[HideInInspector]
 	public Inventory inventory;
 	public int i;
+    public SoundManager soundManager;
 
-	private void Start()
+    private void Start()
 	{
-		
-		inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        soundManager = GameObject.FindGameObjectWithTag("AM").GetComponent<SoundManager>();
+        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
 		chest = GameObject.FindGameObjectWithTag("Chest"); // поиск рюкзака
 		CIM = chest.GetComponent<ChestItemManager>();
 	}
@@ -35,7 +36,9 @@ public class Slot : MonoBehaviour
 			child.GetComponent<Spawn>().SpawnDroppedItem();
 			CIM.ChestItemId[i] = 0;
 			GameObject.Destroy(child.gameObject);
-			
-		}
+            soundManager.AudioSound2.clip = soundManager.Drop;
+            soundManager.AudioSound2.Play();
+
+        }
 	}
 }

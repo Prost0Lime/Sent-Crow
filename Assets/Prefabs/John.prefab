@@ -201,6 +201,7 @@ MonoBehaviour:
   startAnim: {fileID: 0}
   dm: {fileID: 0}
   dt: {fileID: 203033444421822401}
+  soundManager: {fileID: 0}
 --- !u!114 &203033444421822401
 MonoBehaviour:
   m_ObjectHideFlags: 0

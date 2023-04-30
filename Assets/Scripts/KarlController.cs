@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KarlController : MonoBehaviour
 {
@@ -19,12 +20,17 @@ public class KarlController : MonoBehaviour
     Vector2 lookDirection = new Vector2(0, -1);
     public VectorValue pos;     //для кординат игрока
 
+    [HideInInspector]
+    public SoundManager soundManager;
+
+
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
         transform.position = pos.initialValue;
+        soundManager = GameObject.FindGameObjectWithTag("AM").GetComponent<SoundManager>();
     }
 
     void Update()
@@ -61,6 +67,8 @@ public class KarlController : MonoBehaviour
     public void CheckOn()
     {
         animator.SetBool("Check", true);
+        soundManager.AudioSound2.clip = soundManager.Letter;
+        soundManager.AudioSound2.Play();
     }
     
     public void CheckOff()
@@ -71,10 +79,20 @@ public class KarlController : MonoBehaviour
     public void LampOn()
     {
         animator.SetBool("Lamp", true);
+        soundManager.AudioSound2.clip = soundManager.Lamp1;
+        soundManager.AudioSound2.Play();
     }
 
     public void LampOff()
     {
         animator.SetBool("Lamp", false);
+        soundManager.AudioSound2.clip = soundManager.Lamp2;
+        soundManager.AudioSound2.Play();
+    }
+
+    public void Step()
+    {
+        soundManager.AudioSound.clip = soundManager.Steps;
+        soundManager.AudioSound.Play();
     }
 }

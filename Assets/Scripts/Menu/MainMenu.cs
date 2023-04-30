@@ -11,12 +11,14 @@ public class MainMenu : MonoBehaviour
     public VectorValue playerStorage;
     public SaveMethod SM;
     private bool goToMenu;
-
+    [HideInInspector]
+    public SoundManager soundManager;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
         SM = GameObject.FindGameObjectWithTag("SaveMethod").GetComponent<SaveMethod>();
+        soundManager = GameObject.FindGameObjectWithTag("AM").GetComponent<SoundManager>();
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             SM.LoadSettings();
@@ -44,7 +46,10 @@ public class MainMenu : MonoBehaviour
         anim.SetTrigger("Fade");
         SceneMenu = 0;
         Time.timeScale = 1f;                        //разморозка игры
-        
+        soundManager.AudioSound2.clip = soundManager.PauseButton;
+        soundManager.AudioSound2.Play();
+
+
     }
 
     public void NewGame()
@@ -53,17 +58,23 @@ public class MainMenu : MonoBehaviour
         SceneMenu = 1;
         position = new Vector3(-3.86f, 9.23f, 0f);      //начальные координаты игрока при сбросе игры
         SM.ResetData();
+        soundManager.AudioSound2.clip = soundManager.PauseButton;
+        soundManager.AudioSound2.Play();
     }
 
     public void LoadGame()
     {
-
+        soundManager.AudioSound2.clip = soundManager.PauseButton;
+        soundManager.AudioSound2.Play();
         position = playerStorage.initialValue;              //приём сохранённых координат для 
         anim.SetTrigger("Fade");
+
     }
 
     public void doExitGame()
     {
+        soundManager.AudioSound2.clip = soundManager.PauseButton;
+        soundManager.AudioSound2.Play();
         Application.Quit();
     }
 
